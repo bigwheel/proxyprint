@@ -1,7 +1,13 @@
 @(message: String)
 
+@import helper._
+
 @main("Welcome to Play 2.0") {
-    
-    @play20.welcome(message)
-    
+<div class="row">
+    <div class="twelve columns">
+        @form(routes.Application.index) {
+        <input type="submit" value="Delete">
+        }
+    </div>
+</div>
 }
