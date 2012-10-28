@@ -15,6 +15,6 @@ object Application extends Controller {
     val cardlistForm = Form(tuple("multiverseid" -> list(number), "number_of_card" -> list(number)))
     val (mid, noc) = cardlistForm.bindFromRequest.get
 
-    Ok(mid.zip(noc).filter(_._2 != 0).toString())
+    Ok(views.html.card_images(mid.zip(noc).filter(_._2 != 0)))
   }
 }
