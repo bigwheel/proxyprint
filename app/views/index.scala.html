@@ -1,7 +1,5 @@
 @(message: String)
 
-@import helper._
-
 @main("Welcome to Play 2.0") {
 <div class="row">
     <div class="twelve columns">
@@ -16,7 +14,7 @@
         </nav>
     </div>
     <div class="twelve columns">
-        @form(routes.Application.index) {
+        @helper.form(routes.Application.card_images) {
         <fieldset>
             <legend>fieldset</legend>
             @for(index <- Range(0,30)) {
