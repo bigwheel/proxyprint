@@ -12,7 +12,7 @@ object Application extends Controller {
   }
 
   def card_images = Action { implicit request =>
-    val cardlistForm = Form(tuple("multiverseid[0]" -> number, "number_of_card[0]" -> number))
+    val cardlistForm = Form(tuple("multiverseid" -> list(number), "number_of_card" -> list(number)))
     val (mid, noc) = cardlistForm.bindFromRequest.get
 
     Ok(mid.toString + " " + noc.toString)
