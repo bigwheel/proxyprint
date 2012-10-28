@@ -31,15 +31,37 @@
             <li>印刷したいカードをすべて入力し終わったらボタンを押す</li>
         </ol>
     </section>
-    <section class="twelve columns">
-        <h4>印刷用ページの特徴と注意点</h4>
-        印刷用ページとして表示される画面は一見カードの画像が無造作に並んでるように見えますが、
-        実際には上手く印刷されるようにいくつかの工夫がされています。
-        <ul class="circle">
-            <li>スリーブへカードと一緒に入れることを考慮して画像の周囲をトリミング</li>
-            <li>印刷時にA4サイズに合わせて3x3=9枚でカード画像をタイリング</li>
-        </ul>
-    </section>
+    <div class="row">
+        <section class="six columns">
+            <h4>印刷用ページの特徴と注意点</h4>
+            印刷用ページとして表示される画面は一見カードの画像が無造作に並んでるように見えますが、
+            実際には上手く印刷されるようにいくつかの工夫がされています。
+            <ul class="circle">
+                <li>スリーブへカードと一緒に入れることを考慮して画像の周囲をトリミング</li>
+                <li>印刷時にA4サイズに合わせて3x3=9枚でカード画像をタイリング</li>
+            </ul>
+        </section>
+        <section class="six columns">
+            <h4>TODO(できたらいいな)リスト</h4>
+            <ul class="circle">
+                <li>MOのデッキリストを読み込んでmultiverseidを自動入力</li>
+                <li>MTGカード検索ダイアログを作ってgathererで検索する手間を省く</li>
+                <li>入力フォームが不必要に多いためJSで数を調整できるようにする</li>
+                <li>印刷用ページが非常に見づらくわかりにくいので最低限レイアウトを整える</li>
+                <li>印刷用ページのCSSがイマイチなので修正</li>
+                <li>機能改善・要望・クレーム用のフォームを作る</li>
+                <li>送信された値のヴァリデーションやエラー処理をしっかりする</li>
+                <li>カード画像に「PROXY」という透かしを入れる機能をつける(有無を選択できるようにする)</li>
+                <li>
+                    印刷用ページを簡単に共有できるようにする(permalink, getパラメータでカード情報渡す, など)
+                    <ul>
+                        <li>付随してカードの種類・枚数情報を保持しつつ印刷用ページからトップページへ戻れるようにする</li>
+                    </ul>
+                </li>
+                <li>backbone.jsを使ってHistory APIを使ったページ遷移を実装する</li>
+            </ul>
+        </section>
+    </div>
     <div class="twelve columns">
         @helper.form(routes.Application.card_images, 'id -> "cardlist") {
         <fieldset>
