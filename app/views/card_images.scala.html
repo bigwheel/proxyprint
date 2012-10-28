@@ -1,9 +1,9 @@
-@(cards: List[Tuple2[Int, Int]])
+@(cards: List[Int])
 
 @main("Welcome to Play 2.0") {
 <div class="row">
     <div class="twelve columns">
-        @for((multiverseid, num) <- cards; i <- 0 until num) {
+        @for(multiverseid <- cards) {
         <a href="http://gatherer.wizards.com/pages/card/Details.aspx?multiverseid=@(multiverseid)" class=outer>
             <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=@(multiverseid)&type=card" class=inner alt="card image"/>
         </a>
