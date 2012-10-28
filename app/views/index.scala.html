@@ -17,18 +17,26 @@
         @helper.form(routes.Application.card_images) {
         <fieldset>
             <legend>fieldset</legend>
-            @for(index <- Range(0,30)) {
-            <fieldset>
-                <legend>@(index+1)カード目</legend>
-                <div class="row">
-                    <div class="six columns">
-                        <label>multiverseid:<input type="number" name="multiverseid_@(index)" value="265718" /></label>
-                    </div>
-                    <div class="six columns">
-                        <label>枚数:<input type="number" name="number_of_card_@(index)" value="0" /></label>
-                    </div>
+            @for(row <- Range(0,10)) {
+            <div class="row">
+                @for(column <- Range(0, 2)) {
+                <div class="six columns">
+                    <fieldset>
+                        @defining(row * 2 + column) { index =>
+                        <legend>@(index + 1)カード目</legend>
+                        <div class="row">
+                            <div class="eight columns">
+                                <label>multiverseid:<input type="number" name="multiverseid_@(index)" value="265718" /></label>
+                            </div>
+                            <div class="four columns">
+                                <label>枚数:<input type="number" name="number_of_card_@(index)" value="0" /></label>
+                            </div>
+                        </div>
+                        }
+                    </fieldset>
                 </div>
-            </fieldset>
+                }
+            </div>
             }
         </fieldset>
         }
