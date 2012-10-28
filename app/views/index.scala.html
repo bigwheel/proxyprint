@@ -17,6 +17,9 @@
         @helper.form(routes.Application.card_images, 'id -> "cardlist") {
         <fieldset  id="cardlist">
             <legend>fieldset</legend>
+            <div align="center">
+                <input type="submit" class="button" value="印刷用ページを表示" />
+            </div>
             @for(row <- 0 until 10) {
             <div class="row">
                 @for(column <- 0 until 2) {
@@ -38,7 +41,6 @@
                 }
             </div>
             }
-            <input type="submit" />
         </fieldset>
         }
     </div>
