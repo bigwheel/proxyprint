@@ -15,14 +15,17 @@ object Application extends Controller {
     val cardlistForm = Form(tuple("multiverseid" -> list(number), "number_of_card" -> list(number)))
     val (mid, noc) = cardlistForm.bindFromRequest.get
 
-    var count = 0
-    def separateBy9 = {
-      val result = count / 9
-      count += 1
-      result
+    def separateBy9(l :List[Int]) : List[List[Int]] = {
+      l match {
+        case List() =>
+          Nil
+        case _ =>
+          val (heads, tails) = l.splitAt(9)
+          List(heads):::separateBy9(tails)
+      }
     }
-    val a = mid.zip(noc).flatMap(a => List.fill(a._2)(a._1)).groupBy(_ => separateBy9).values.toList
-    println(a.toString())
-    Ok(views.html.card_images(a))
+    val a = mid.zip(noc).flatMap(a => List.fill(a._2)(a._1))
+    println(separateBy9(a))
+    Ok(views.html.card_images(separateBy9(a)))
   }
 }
