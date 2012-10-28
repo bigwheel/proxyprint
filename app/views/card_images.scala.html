@@ -20,11 +20,17 @@
         top:-10px;
         left:-10px;
         }
+        div.page {
+        page-break-before:always;
+        }
+        div.page:first-child {
+        page-break-before:avoid;
+        }
     </style>
 </head>
 <body>
 @for(page <- cards) {
-<div style="page-break-before:always;">
+<div class="page">
     @for(multiverseid <- page) {
     <a href="http://gatherer.wizards.com/pages/card/Details.aspx?multiverseid=@(multiverseid)" class=outer>
         <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=@(multiverseid)&type=card" class=inner alt="card image"/>
