@@ -17,12 +17,17 @@
     </div>
     <div class="twelve columns">
         @form(routes.Application.index) {
-        <label>
-            multiverseid:<input type="number" name="multiverseid">
-        </label>
-        <label>
-            枚数:<input type="number" name="number_of_card_{{ i }}" value="1">
-        </label>
+        <fieldset>
+            <legend>fieldset</legend>
+            <div class="row">
+                <div class="six columns">
+                    <input type="number" name="multiverseid" placeholder="multiverseid"/>
+                </div>
+                <div class="six columns">
+                    <input type="number" name="number_of_card_{{ i }}" value="1" placeholder="枚数"/>
+                </div>
+            </div>
+        </fieldset>
         }
     </div>
 </div>
