@@ -7,7 +7,7 @@
             <ul>
                 <li class="name">
                     <h1>
-                        <a href="/">Proxy Print</a>
+                        <a href="/">MTG プロキシ印刷ウェブアプリケーション</a>
                     </h1>
                 </li>
             </ul>
@@ -15,7 +15,7 @@
     </div>
     <div class="twelve columns">
         @helper.form(routes.Application.card_images, 'id -> "cardlist") {
-        <fieldset  id="cardlist">
+        <fieldset>
             <legend>fieldset</legend>
             <div align="center">
                 <input type="submit" class="button" value="印刷用ページを表示" />
@@ -24,7 +24,7 @@
             <div class="row">
                 @for(column <- 0 until 2) {
                 <div class="six columns">
-                    <fieldset id="cardlist">
+                    <fieldset>
                         @defining(row * 2 + column) { index =>
                         <legend>@(index + 1)カード目</legend>
                         <div class="row">
