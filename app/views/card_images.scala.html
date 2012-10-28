@@ -3,7 +3,11 @@
 @main("Welcome to Play 2.0") {
 <div class="row">
     <div class="twelve columns">
-        @cards.toString()
+        @for((multiverseid, num) <- cards; i <- 0 until num) {
+        <a href="http://gatherer.wizards.com/pages/card/Details.aspx?multiverseid=@(multiverseid)" class=outer>
+            <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=@(multiverseid)&type=card" class=inner alt="card image"/>
+        </a>
+        }
     </div>
 </div>
 }
