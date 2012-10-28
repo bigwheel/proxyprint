@@ -15,7 +15,14 @@ object Application extends Controller {
     val cardlistForm = Form(tuple("multiverseid" -> list(number), "number_of_card" -> list(number)))
     val (mid, noc) = cardlistForm.bindFromRequest.get
 
-    val a = mid.zip(noc).flatMap (a => List.fill(a._2)(a._1) )
+    var count = 0
+    def separateBy9 = {
+      val result = count / 9
+      count += 1
+      result
+    }
+    val a = mid.zip(noc).flatMap(a => List.fill(a._2)(a._1)).groupBy(_ => separateBy9).values.toList
+    println(a.toString())
     Ok(views.html.card_images(a))
   }
 }
