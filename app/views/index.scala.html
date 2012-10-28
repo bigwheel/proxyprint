@@ -13,6 +13,33 @@
             </ul>
         </nav>
     </div>
+    <section class="twelve columns">
+        <h4>使い方</h4>
+        <ol>
+            <li>
+                印刷したいカードをMTG公式データベース
+                <a href="http://gatherer.wizards.com/Pages/Default.aspx">Gatherer</a>で検索する
+                <ul class="circle"><li>正常に検索できない場合言語設定が正しくない可能性がある。
+                    <a href="http://d.hatena.ne.jp/den8/20110710/1310288086">こちら</a>を参考に確認</li></ul>
+            </li>
+            <li>
+                検索結果のURLからmultiverseidという値をコピーする
+                <ul class="circle"><li>「http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=<span style="color:red">265718</span>」の赤い部分</li></ul>
+            </li>
+            <li>コピーした値を下のmultiverseidの部分へ貼り付ける(※デフォルトの値265718は酸のスライム)</li>
+            <li>印刷したい枚数を先ほど貼りつけたフォームの右に入力</li>
+            <li>印刷したいカードをすべて入力し終わったらボタンを押す</li>
+        </ol>
+    </section>
+    <section class="twelve columns">
+        <h4>印刷用ページの特徴と注意点</h4>
+        印刷用ページとして表示される画面は一見カードの画像が無造作に並んでるように見えますが、
+        実際には上手く印刷されるようにいくつかの工夫がされています。
+        <ul class="circle">
+            <li>スリーブへカードと一緒に入れることを考慮して画像の周囲をトリミング</li>
+            <li>印刷時にA4サイズに合わせて3x3=9枚でカード画像をタイリング</li>
+        </ul>
+    </section>
     <div class="twelve columns">
         @helper.form(routes.Application.card_images, 'id -> "cardlist") {
         <fieldset>
@@ -43,6 +70,12 @@
             }
         </fieldset>
         }
+    </div>
+    <div class="twelve columns" align="center">
+        <small>
+            改善要望・クレーム・希望その他もろもろはこっちに<br />
+            k.bigwheel+proxyprintあっとまーくgmail.com
+        </small>
     </div>
 </div>
 }
