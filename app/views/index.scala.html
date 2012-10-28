@@ -19,14 +19,19 @@
         @form(routes.Application.index) {
         <fieldset>
             <legend>fieldset</legend>
-            <div class="row">
-                <div class="six columns">
-                    <input type="number" name="multiverseid" placeholder="multiverseid"/>
+            @for(index <- Range(0,30)) {
+            <fieldset>
+                <legend>@(index+1)カード目</legend>
+                <div class="row">
+                    <div class="six columns">
+                        <label>multiverseid:<input type="number" name="multiverseid_@(index)" value="265718" /></label>
+                    </div>
+                    <div class="six columns">
+                        <label>枚数:<input type="number" name="number_of_card_@(index)" value="0" /></label>
+                    </div>
                 </div>
-                <div class="six columns">
-                    <input type="number" name="number_of_card_{{ i }}" value="1" placeholder="枚数"/>
-                </div>
-            </div>
+            </fieldset>
+            }
         </fieldset>
         }
     </div>
