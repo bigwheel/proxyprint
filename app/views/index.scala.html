@@ -14,22 +14,22 @@
         </nav>
     </div>
     <div class="twelve columns">
-        @helper.form(routes.Application.card_images) {
-        <fieldset>
+        @helper.form(routes.Application.card_images, 'id -> "cardlist") {
+        <fieldset  id="cardlist">
             <legend>fieldset</legend>
             @for(row <- Range(0,10)) {
             <div class="row">
                 @for(column <- Range(0, 2)) {
                 <div class="six columns">
-                    <fieldset>
+                    <fieldset id="cardlist">
                         @defining(row * 2 + column) { index =>
                         <legend>@(index + 1)カード目</legend>
                         <div class="row">
                             <div class="eight columns">
-                                <label>multiverseid:<input type="number" name="multiverseid_@(index)" value="265718" /></label>
+                                <label>multiverseid:<input type="number" name="multiverseid[@(index)]" value="265718" /></label>
                             </div>
                             <div class="four columns">
-                                <label>枚数:<input type="number" name="number_of_card_@(index)" value="0" /></label>
+                                <label>枚数:<input type="number" name="number_of_card[@(index)]" value="0" /></label>
                             </div>
                         </div>
                         }
@@ -38,6 +38,7 @@
                 }
             </div>
             }
+            <input type="submit" />
         </fieldset>
         }
     </div>
