@@ -1,4 +1,4 @@
-@(message: String)
+@()
 
 @layout("MTG プロキシ印刷ウェブアプリケーション") {
 <div class="row">
@@ -65,7 +65,7 @@
     <div class="twelve columns">
         @helper.form(routes.Application.card_images, 'id -> "cardlist") {
         <fieldset>
-            <legend>fieldset</legend>
+            <legend>カード入力フォーム</legend>
             <div align="center">
                 <input type="submit" class="button" value="印刷用ページを表示" />
             </div>

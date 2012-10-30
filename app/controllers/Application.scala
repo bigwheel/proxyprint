@@ -8,7 +8,7 @@ import play.api.data.Forms._
 object Application extends Controller {
 
   def index = Action {
-    Ok(views.html.index("Your new application is ready."))
+    Ok(views.html.index())
   }
 
   def card_images = Action { implicit request =>
@@ -24,8 +24,7 @@ object Application extends Controller {
           List(heads):::separateBy9(tails)
       }
     }
-    val a = mid.zip(noc).flatMap(a => List.fill(a._2)(a._1))
-    println(separateBy9(a))
-    Ok(views.html.card_images(separateBy9(a)))
+    val cardlist = mid.zip(noc).flatMap(a => List.fill(a._2)(a._1))
+    Ok(views.html.card_images(separateBy9(cardlist)))
   }
 }
