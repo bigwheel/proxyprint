@@ -63,6 +63,52 @@
         </section>
     </div>
     <div class="twelve columns">
+        <div id="search_dialog" class="row" title="カード検索ダイアログ">
+            <div class="twelve columns">
+                <form>
+                    @for(row <- List(List("カード名", "マナコスト（合計）", "特殊タイプ"),
+                    List("カードタイプ", "サブタイプ", "カードテキスト"),
+                    List("フレーバーテキスト", "透かし", "色指標"),
+                    List("パワー", "タフネス", "忠誠度"),
+                    List("エキスパンション", "レアリティ", "含まれるカードセット"),
+                    List("カード番号", "アーティスト", "マルチバースID"))) {
+                    <div class="row">
+                        @for(a <- row) {
+                        <div class="four columns">
+                            <label>@(a):<input type="text" placeholder="@(a)" /></label>
+                        </div>
+                        }
+                    </div>
+                    }
+                    <script>
+                        function onButtonClick() {
+                        $.ajax({
+                        url: 'http://mtgbase.herokuapp.com/search',
+                        data: { card_name: 'Acidic' },
+                        dataType: 'json'
+                        }).success(function(data) {
+                        var select_dialog = $("#select_dialog");
+
+                        _.each(data, function(card_property) {
+                        select_dialog.append("<img src=\"" + card_property.card_image_url + "\">");
+                        $( "#select_dialog" ).dialog({width: 800, height: 550});
+                        console.log(data);
+                        });
+                        });
+                        return false;
+                        }
+                    </script>
+                    <a class="button" href="#" onclick="return onButtonClick();">検索</a>
+                </form>
+            </div>
+        </div>
+        <script>
+            $(function() {
+            $( "#search_dialog" ).dialog({width: 800, height: 550});
+            });
+        </script>
+        <div id="select_dialog" class="row" title="カード選択ダイアログ">
+        </div>
         @helper.form(routes.Application.card_images, 'id -> "cardlist") {
         <fieldset>
             <legend>カード入力フォーム</legend>
