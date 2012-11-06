@@ -16,7 +16,9 @@ function onButtonClick() {
 }
 
 $(document).ready(function(){
-    $("#search_dialog").dialog({width: 800, height: 550});
+    $(".card_search_button").live("click", function(event) {
+        $("#search_dialog").dialog({width: 800, height: 550});
+    });
     $(".card_image").live("click", function(event) {
         $("#select_dialog").dialog("close");
         $("#search_dialog").dialog("close");
