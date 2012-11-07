@@ -113,23 +113,28 @@
     <div id="select_dialog" class="row" title="カード選択ダイアログ" style="display:none;">
     </div>
     <script type="text/template" id="card_print_form">
-        <li class="row">
+        <li>
             <fieldset>
                 <legend><%= index + 1 %>カード目</legend>
-                <div class="eight columns">
-                    <label>multiverseid:
-                        <div class="row collapse">
-                            <div class="eight columns">
-                                <a class="button expand prefix card_search_button" index="<%= index %>">カードを検索</a>
-                            </div>
-                            <div class="four columns">
-                                <input type="number" name="multiverseid[<%= index %>]" value="265718" id="mid_input_<%= index %>" />
-                            </div>
-                        </div>
-                    </label>
+                <div align="center" class="div_card_image">
+                    <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=265718&type=card">
                 </div>
-                <div class="four columns">
-                    <label>枚数:<input type="number" name="number_of_card[<%= index %>]" value="1" min="0"></label>
+                <div class="row">
+                    <div class="eight columns">
+                        <label>multiverseid:
+                            <div class="row collapse">
+                                <div class="eight columns">
+                                    <a class="button expand prefix card_search_button" index="<%= index %>">カードを検索</a>
+                                </div>
+                                <div class="four columns">
+                                    <input type="number" class="input_card_number" name="multiverseid[<%= index %>]" value="265718" id="mid_input_<%= index %>" />
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="four columns">
+                        <label>枚数:<input type="number" name="number_of_card[<%= index %>]" value="1" min="0"></label>
+                    </div>
                 </div>
             </fieldset>
         </li>

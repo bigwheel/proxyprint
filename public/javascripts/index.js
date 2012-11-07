@@ -4,6 +4,7 @@ $(document).ready(function(){
 
     $("#card_search_button").click(function() {
         select_dialog.dialog({width: 800, height: 550});
+        select_dialog.empty();
         $.getJSON(
             'http://mtgbase.herokuapp.com/search',
             { card_name: $("#card_name").val() }
@@ -31,6 +32,12 @@ $(document).ready(function(){
         }
     });
 
+    $(".input_card_number").change(function(event) {
+        var input_multiverseid = $(event.target);
+        input_multiverseid.closest("fieldset").find("div.div_card_image img").
+            attr("src", "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + String(input_multiverseid.val()) + "&type=card");
+    });
+
     $(".card_search_button").live("click", function(event) {
         search_dialog.dialog({width: 800, height: 550});
         search_dialog.data('index', $(this).attr('index'));
@@ -39,6 +46,8 @@ $(document).ready(function(){
     $(".card_image").live("click", function(event) {
         select_dialog.dialog("close");
         search_dialog.dialog("close");
-        $("#mid_input_" + String(search_dialog.data('index'))).val($(event.target).attr("multiverseid"));
+        var input_mid = $("#mid_input_" + String(search_dialog.data('index')));
+        input_mid.val($(event.target).attr("multiverseid"));
+        input_mid.change();
     });
 });
