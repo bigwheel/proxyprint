@@ -17,11 +17,14 @@ function onButtonClick() {
 
 $(document).ready(function(){
     $(".card_search_button").live("click", function(event) {
-        $("#search_dialog").dialog({width: 800, height: 550});
+        var search_dialog = $("#search_dialog");
+        search_dialog.dialog({width: 800, height: 550});
+        search_dialog.data('index', $(this).attr('index'));
     });
     $(".card_image").live("click", function(event) {
         $("#select_dialog").dialog("close");
-        $("#search_dialog").dialog("close");
-        $("#mid_input_0").val($(event.target).attr("multiverseid"));
+        var search_dialog = $("#search_dialog");
+        search_dialog.dialog("close");
+        $("#mid_input_" + String(search_dialog.data('index'))).val($(event.target).attr("multiverseid"));
     });
 });
