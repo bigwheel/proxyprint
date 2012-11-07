@@ -32,7 +32,7 @@ $(document).ready(function(){
         }
     });
 
-    $(".input_card_number").change(function(event) {
+    $(".input_card_number").live("change", function(event) {
         var input_multiverseid = $(event.target);
         input_multiverseid.closest("fieldset").find("div.div_card_image img").
             attr("src", "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + String(input_multiverseid.val()) + "&type=card");
