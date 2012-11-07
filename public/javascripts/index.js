@@ -15,9 +15,14 @@ $(document).ready(function(){
         });
     });
 
-    _.each(_.range(0, 20), function(index) {
-        $("#card_list_for_print").append(_.template($("#card_print_form").html(), { index: index }));
+    var card_list_for_print = $("#card_list_for_print");
+    card_list_for_print.data("count", 0);
+    var add_card_input_form_button = $("#add_card_input_form_button");
+    add_card_input_form_button.click(function() {
+        card_list_for_print.append(_.template($("#card_print_form").html(), { index: card_list_for_print.data("count") }));
+        card_list_for_print.data("count", card_list_for_print.data("count") + 1);
     });
+    add_card_input_form_button.click();
 
     $(".card_search_button").live("click", function(event) {
         search_dialog.dialog({width: 800, height: 550});

@@ -67,8 +67,13 @@
         @helper.form(routes.Application.card_images, 'id -> "cardlist") {
         <fieldset>
             <legend>カード入力フォーム</legend>
-            <div align="center">
-                <input type="submit" class="button" value="印刷用ページを表示" />
+            <div class="row">
+                <div class="six columns" align="center">
+                    <a class="secondary button" id="add_card_input_form_button">カード入力欄を追加</a>
+                </div>
+                <div class="six columns" align="center">
+                    <input type="submit" class="success button" value="印刷用ページを表示" />
+                </div>
             </div>
             <ul class="block-grid two-up" id="card_list_for_print">
             </ul>
