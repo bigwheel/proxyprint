@@ -24,6 +24,12 @@ $(document).ready(function(){
     };
     add_card_input_form_button.click(add_card_input_form);
     add_card_input_form();
+    $("#remove_card_input_form_button").click(function(){
+        if (card_list_for_print.data("count") > 1) {
+            card_list_for_print.children().last().remove();
+            card_list_for_print.data("count", card_list_for_print.data("count") - 1);
+        }
+    });
 
     $(".card_search_button").live("click", function(event) {
         search_dialog.dialog({width: 800, height: 550});

@@ -68,8 +68,11 @@
         <fieldset>
             <legend>カード入力フォーム</legend>
             <div class="row">
-                <div class="six columns" align="center">
+                <div class="three columns" align="center">
                     <a class="secondary button" id="add_card_input_form_button">カード入力欄を追加</a>
+                </div>
+                <div class="three columns" align="center">
+                    <a class="secondary button" id="remove_card_input_form_button">カード入力欄を削減</a>
                 </div>
                 <div class="six columns" align="center">
                     <input type="submit" class="success button" value="印刷用ページを表示" />
@@ -126,7 +129,7 @@
                     </label>
                 </div>
                 <div class="four columns">
-                    <label>枚数:<input type="number" name="number_of_card[<%= index %>]" value="0" /></label>
+                    <label>枚数:<input type="number" name="number_of_card[<%= index %>]" value="1" min="0"></label>
                 </div>
             </fieldset>
         </li>
