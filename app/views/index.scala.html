@@ -70,29 +70,7 @@
             <div align="center">
                 <input type="submit" class="button" value="印刷用ページを表示" />
             </div>
-            <ul class="block-grid two-up">
-                @for(index <- 0 until 20) {
-                <li class="row">
-                    <fieldset>
-                        <legend>@(index + 1)カード目</legend>
-                        <div class="eight columns">
-                            <label>multiverseid:
-                                <div class="row collapse">
-                                    <div class="eight columns">
-                                        <a class="button expand prefix card_search_button" index="@(index)">カードを検索</a>
-                                    </div>
-                                    <div class="four columns">
-                                        <input type="number" name="multiverseid[@(index)]" value="265718" id="mid_input_@(index)" />
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="four columns">
-                            <label>枚数:<input type="number" name="number_of_card[@(index)]" value="0" /></label>
-                        </div>
-                    </fieldset>
-                </li>
-                }
+            <ul class="block-grid two-up" id="card_list_for_print">
             </ul>
         </fieldset>
         }
@@ -126,5 +104,27 @@
     </div>
     <div id="select_dialog" class="row" title="カード選択ダイアログ" style="display:none;">
     </div>
+    <script type="text/template" id="card_print_form">
+        <li class="row">
+            <fieldset>
+                <legend><%= index + 1 %>カード目</legend>
+                <div class="eight columns">
+                    <label>multiverseid:
+                        <div class="row collapse">
+                            <div class="eight columns">
+                                <a class="button expand prefix card_search_button" index="<%= index %>">カードを検索</a>
+                            </div>
+                            <div class="four columns">
+                                <input type="number" name="multiverseid[<%= index %>]" value="265718" id="mid_input_<%= index %>" />
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <div class="four columns">
+                    <label>枚数:<input type="number" name="number_of_card[<%= index %>]" value="0" /></label>
+                </div>
+            </fieldset>
+        </li>
+    </script>
 </div>
 }

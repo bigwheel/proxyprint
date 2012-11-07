@@ -15,6 +15,10 @@ $(document).ready(function(){
         });
     });
 
+    _.each(_.range(0, 20), function(index) {
+        $("#card_list_for_print").append(_.template($("#card_print_form").html(), { index: index }));
+    });
+
     $(".card_search_button").live("click", function(event) {
         search_dialog.dialog({width: 800, height: 550});
         search_dialog.data('index', $(this).attr('index'));
