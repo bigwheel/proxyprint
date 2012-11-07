@@ -70,36 +70,30 @@
             <div align="center">
                 <input type="submit" class="button" value="印刷用ページを表示" />
             </div>
-            @for(row <- 0 until 10) {
-            <div class="row">
-                @for(column <- 0 until 2) {
-                <div class="six columns">
+            <ul class="block-grid two-up">
+                @for(index <- 0 until 20) {
+                <li class="row">
                     <fieldset>
-                        @defining(row * 2 + column) { index =>
                         <legend>@(index + 1)カード目</legend>
-                        <div class="row">
-                            <div class="eight columns">
-                                <label>multiverseid:
-                                    <div class="row collapse">
-                                        <div class="eight columns">
-                                            <a class="button expand prefix card_search_button" index="@(index)">カードを検索</a>
-                                        </div>
-                                        <div class="four columns">
-                                            <input type="number" name="multiverseid[@(index)]" value="265718" id="mid_input_@(index)" />
-                                        </div>
+                        <div class="eight columns">
+                            <label>multiverseid:
+                                <div class="row collapse">
+                                    <div class="eight columns">
+                                        <a class="button expand prefix card_search_button" index="@(index)">カードを検索</a>
                                     </div>
-                                </label>
-                            </div>
-                            <div class="four columns">
-                                <label>枚数:<input type="number" name="number_of_card[@(index)]" value="0" /></label>
-                            </div>
+                                    <div class="four columns">
+                                        <input type="number" name="multiverseid[@(index)]" value="265718" id="mid_input_@(index)" />
+                                    </div>
+                                </div>
+                            </label>
                         </div>
-                        }
+                        <div class="four columns">
+                            <label>枚数:<input type="number" name="number_of_card[@(index)]" value="0" /></label>
+                        </div>
                     </fieldset>
-                </div>
+                </li>
                 }
-            </div>
-            }
+            </ul>
         </fieldset>
         }
     </div>
