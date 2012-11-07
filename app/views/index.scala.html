@@ -64,29 +64,6 @@
         </section>
     </div>
     <div class="twelve columns">
-        <div id="search_dialog" class="row" title="カード検索ダイアログ">
-            <div class="twelve columns">
-                <form>
-                    @for(row <- List(List(("カード名", "card_name"), ("マナコスト（合計）", "converted_mana_cost"), ("特殊タイプ", "supertypes")),
-                    List(("カードタイプ", "cardtypes"), ("サブタイプ", ""), ("カードテキスト", "")),
-                    List(("フレーバーテキスト", ""), ("透かし", ""), ("色指標", "")),
-                    List(("パワー", ""), ("タフネス", ""), ("忠誠度", "")),
-                    List(("エキスパンション", ""), ("レアリティ", ""), ("含まれるカードセット", "")),
-                    List(("カード番号", ""), ("アーティスト", ""), ("マルチバースID", "")))) {
-                    <div class="row">
-                        @for(a <- row) {
-                        <div class="four columns">
-                            <label>@(a._1):<input type="text" placeholder="@(a._1)" id="@(a._2)"/></label>
-                        </div>
-                        }
-                    </div>
-                    }
-                    <a class="button" href="#" onclick="return onButtonClick();">検索</a>
-                </form>
-            </div>
-        </div>
-        <div id="select_dialog" class="row" title="カード選択ダイアログ">
-        </div>
         @helper.form(routes.Application.card_images, 'id -> "cardlist") {
         <fieldset>
             <legend>カード入力フォーム</legend>
@@ -131,6 +108,29 @@
             改善要望・クレーム・希望その他もろもろはこっちに<br />
             k.bigwheel+proxyprintあっとまーくgmail.com
         </small>
+    </div>
+    <div id="search_dialog" class="row" title="カード検索ダイアログ" style="display:none;">
+        <div class="twelve columns">
+            <form>
+                @for(row <- List(List(("カード名", "card_name"), ("マナコスト（合計）", "converted_mana_cost"), ("特殊タイプ", "supertypes")),
+                List(("カードタイプ", "cardtypes"), ("サブタイプ", ""), ("カードテキスト", "")),
+                List(("フレーバーテキスト", ""), ("透かし", ""), ("色指標", "")),
+                List(("パワー", ""), ("タフネス", ""), ("忠誠度", "")),
+                List(("エキスパンション", ""), ("レアリティ", ""), ("含まれるカードセット", "")),
+                List(("カード番号", ""), ("アーティスト", ""), ("マルチバースID", "")))) {
+                <div class="row">
+                    @for(a <- row) {
+                    <div class="four columns">
+                        <label>@(a._1):<input type="text" placeholder="@(a._1)" id="@(a._2)"/></label>
+                    </div>
+                    }
+                </div>
+                }
+                <a class="button" href="#" onclick="return onButtonClick();">検索</a>
+            </form>
+        </div>
+    </div>
+    <div id="select_dialog" class="row" title="カード選択ダイアログ" style="display:none;">
     </div>
 </div>
 }
