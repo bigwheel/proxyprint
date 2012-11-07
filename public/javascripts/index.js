@@ -18,11 +18,12 @@ $(document).ready(function(){
     var card_list_for_print = $("#card_list_for_print");
     card_list_for_print.data("count", 0);
     var add_card_input_form_button = $("#add_card_input_form_button");
-    add_card_input_form_button.click(function() {
+    function add_card_input_form() {
         card_list_for_print.append(_.template($("#card_print_form").html(), { index: card_list_for_print.data("count") }));
         card_list_for_print.data("count", card_list_for_print.data("count") + 1);
-    });
-    add_card_input_form_button.click();
+    };
+    add_card_input_form_button.click(add_card_input_form);
+    add_card_input_form();
 
     $(".card_search_button").live("click", function(event) {
         search_dialog.dialog({width: 800, height: 550});
