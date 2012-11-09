@@ -45,9 +45,10 @@
         <section class="six columns">
             <h4>TODO(できたらいいな)リスト</h4>
             <ul class="circle">
+                <li>言語によって印刷するカードを変更できるようにする(スクレイピング処理の修正が必要)</li>
                 <li>MOのデッキリストを読み込んでmultiverseidを自動入力</li>
-                <li>MTGカード検索ダイアログを作ってgathererで検索する手間を省く</li>
-                <li>入力フォームが不必要に多いためJSで数を調整できるようにする</li>
+                <li><del>MTGカード検索ダイアログを作ってgathererで検索する手間を省く</del></li>
+                <li><del>入力フォームが不必要に多いためJSで数を調整できるようにする</del></li>
                 <li>印刷用ページが非常に見づらくわかりにくいので最低限レイアウトを整える</li>
                 <li>印刷用ページのCSSがイマイチなので修正</li>
                 <li>機能改善・要望・クレーム用のフォームを作る</li>
@@ -92,12 +93,12 @@
     <div id="search_dialog" class="row" title="カード検索ダイアログ" style="display:none;">
         <div class="twelve columns">
             <form>
-                @for(row <- List(List(("カード名", "card_name"), ("マナコスト（合計）", "converted_mana_cost"), ("特殊タイプ", "supertypes")),
-                List(("カードタイプ", "cardtypes"), ("サブタイプ", ""), ("カードテキスト", "")),
-                List(("フレーバーテキスト", ""), ("透かし", ""), ("色指標", "")),
-                List(("パワー", ""), ("タフネス", ""), ("忠誠度", "")),
-                List(("エキスパンション", ""), ("レアリティ", ""), ("含まれるカードセット", "")),
-                List(("カード番号", ""), ("アーティスト", ""), ("マルチバースID", "")))) {
+                @for(row <- List(List(("カード名(英語のみ)", "card_name")/*, ("マナコスト（合計）", "converted_mana_cost"), ("特殊タイプ", "type.supertypes")),
+                List(("カードタイプ", "type.cardtypes"), ("サブタイプ", "type.subtypes"), ("カードテキスト", "card_text")),
+                List(("フレーバーテキスト", "flavor_text"), ("透かし", "watermark"), ("色指標", "color_indicator")),
+                List(("パワー", "p_t.power"), ("タフネス", "p_t.toughness"), ("忠誠度", "loyalty")),
+                List(("エキスパンション", "expansion"), ("レアリティ", "rarity"), ("含まれるカードセット", "")),
+                List(("カード番号", ""), ("アーティスト", "artist"), ("マルチバースID", "")*/))) {
                 <div class="row">
                     @for(a <- row) {
                     <div class="four columns">
@@ -106,7 +107,7 @@
                     }
                 </div>
                 }
-                <a class="button" id="card_search_button">検索</a>
+                <input type="submit" class="button" id="card_search_button" value="検索">
             </form>
         </div>
     </div>
