@@ -9,10 +9,14 @@ $(document).ready(function(){
             'http://mtgbase.herokuapp.com/search',
             { card_name: $("#card_name").val() }
         ).done(function(data) {
-            _.each(data, function(card_property) {
-                var image_tag = "<img class='card_image' src='<%= src %>' multiverseid='<%= multiverseid %>'>";
-                select_dialog.append(_.template(image_tag, {src: card_property.card_image_url, multiverseid: card_property.multiverseid}));
-            });
+            if (data.length === 0) {
+                select_dialog.append("<div>該当カードなし</div>");
+            } else {
+                _.each(data, function(card_property) {
+                    var image_tag = "<img class='card_image' src='<%= src %>' multiverseid='<%= multiverseid %>' style='cursor:pointer;'>";
+                    select_dialog.append(_.template(image_tag, {src: card_property.card_image_url, multiverseid: card_property.multiverseid}));
+                });
+            }
         });
     });
 
