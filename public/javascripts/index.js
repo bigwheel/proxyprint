@@ -3,7 +3,7 @@ $(document).ready(function(){
     var select_dialog = $("#select_dialog");
 
     $("#card_search_button").click(function() {
-        select_dialog.dialog({width: 800, height: 550});
+        select_dialog.dialog({width: 800, height: 800, modal: true});
         select_dialog.empty();
         $.getJSON(
             'http://mtgbase.herokuapp.com/search',
@@ -39,7 +39,7 @@ $(document).ready(function(){
     });
 
     $(".card_search_button").live("click", function(event) {
-        search_dialog.dialog({width: 800, height: 550});
+        search_dialog.dialog({width: 800, height: 550, modal: true});
         search_dialog.data('index', $(this).attr('index'));
     });
 
