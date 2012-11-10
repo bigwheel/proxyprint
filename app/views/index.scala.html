@@ -78,7 +78,7 @@
                     <input type="submit" class="success button" value="印刷用ページを表示" />
                 </div>
             </div>
-            <ul class="block-grid two-up" id="card_list_for_print">
+            <ul class="block-grid three-up" id="card_list_for_print">
             </ul>
         </fieldset>
         }
@@ -117,22 +117,22 @@
             <fieldset>
                 <legend><%= index + 1 %>カード目</legend>
                 <div align="center" class="div_card_image">
-                    <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=265718&type=card">
+                    <img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=265718&type=card" width='111' height='155'>
                 </div>
                 <div class="row">
-                    <div class="eight columns">
+                    <div class="nine columns">
                         <label>multiverseid:
                             <div class="row collapse">
-                                <div class="eight columns">
+                                <div class="six columns">
                                     <a class="button expand prefix card_search_button" index="<%= index %>">カードを検索</a>
                                 </div>
-                                <div class="four columns">
+                                <div class="six columns">
                                     <input type="number" class="input_card_number" name="mid[<%= index %>]" value="265718" id="mid_input_<%= index %>" />
                                 </div>
                             </div>
                         </label>
                     </div>
-                    <div class="four columns">
+                    <div class="three columns">
                         <label>枚数:<input type="number" name="num[<%= index %>]" value="1" min="0"></label>
                     </div>
                 </div>
