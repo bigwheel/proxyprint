@@ -11,7 +11,7 @@ object Application extends Controller {
   }
 
   def card_images = Action { implicit request =>
-    val cardlistForm = Form(tuple("multiverseid" -> list(number), "number_of_card" -> list(number)))
+    val cardlistForm = Form(tuple("mid" -> list(number), "num" -> list(number)))
     val (mid, noc) = cardlistForm.bindFromRequest.get
 
     def separateBy9(l :List[Int]) : List[List[Int]] = {
