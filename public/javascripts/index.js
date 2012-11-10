@@ -5,13 +5,14 @@ $(document).ready(function(){
     $("#card_search_button").click(function() {
         select_dialog.dialog({width: 800, height: 800, modal: true});
         select_dialog.empty();
+        var params = {};
+        _.each($("#search_dialog input[name]"), function(param) {
+            params[$(param).attr("name")] = $(param).val();
+        });
+        params['result_filter[0]'] = 'card_image_url';
+        params['result_filter[1]'] = 'multiverseid';
         $.getJSON(
-            'http://mtgbase.herokuapp.com/search',
-            {
-                card_name: $("#card_name").val(),
-                'result_filter[0]': 'card_image_url',
-                'result_filter[1]': 'multiverseid'
-            }
+            'http://mtgbase.herokuapp.com/search', params
         ).done(function(data) {
             if (data.length === 0) {
                 select_dialog.append("<div>該当カードなし</div>");

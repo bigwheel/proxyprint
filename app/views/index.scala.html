@@ -92,21 +92,21 @@
     <div id="search_dialog" class="row" title="カード検索ダイアログ" style="display:none;">
         <div class="twelve columns">
             <form>
-                @for(row <- List(List(("カード名(英語のみ)", "card_name")/*, ("マナコスト（合計）", "converted_mana_cost"), ("特殊タイプ", "type.supertypes")),
-                List(("カードタイプ", "type.cardtypes"), ("サブタイプ", "type.subtypes"), ("カードテキスト", "card_text")),
-                List(("フレーバーテキスト", "flavor_text"), ("透かし", "watermark"), ("色指標", "color_indicator")),
-                List(("パワー", "p_t.power"), ("タフネス", "p_t.toughness"), ("忠誠度", "loyalty")),
-                List(("エキスパンション", "expansion"), ("レアリティ", "rarity"), ("含まれるカードセット", "")),
-                List(("カード番号", ""), ("アーティスト", "artist"), ("マルチバースID", "")*/))) {
-                <div class="row">
-                    @for(a <- row) {
-                    <div class="four columns">
-                        <label>@(a._1):<input type="text" placeholder="@(a._1)" id="@(a._2)"/></label>
-                    </div>
-                    }
-                </div>
+                <ul class="block-grid three-up">
+                @for(attr <- List(("カード名(英語のみ)", "card_name"), ("マナコスト（合計）", "converted_mana_cost"), ("特殊タイプ", "type.supertypes"),
+                ("カードタイプ", "type.cardtypes"), ("サブタイプ", "type.subtypes"), ("カードテキスト", "card_text"),
+                ("フレーバーテキスト", "flavor_text"), ("透かし", "watermark"), ("色指標", "color_indicator"),
+                ("パワー", "p_t.power"), ("タフネス", "p_t.toughness"), ("忠誠度", "loyalty"),
+                ("エキスパンション", "expansion"), ("レアリティ", "rarity"),/* ("含まれるカードセット", ""),*/
+                /*("カード番号", ""), */("アーティスト", "artist")/*, ("マルチバースID", "")*/)) {
+                    <li>
+                        <label>@(attr._1):<input type="text" placeholder="@(attr._1)" name="@(attr._2)"/></label>
+                    </li>
                 }
-                <input type="submit" class="button" id="card_search_button" value="検索">
+                </ul>
+                <div align="center">
+                    <input type="submit" class="button" id="card_search_button" value="検索">
+                </div>
             </form>
         </div>
     </div>
