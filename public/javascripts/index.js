@@ -7,7 +7,11 @@ $(document).ready(function(){
         select_dialog.empty();
         $.getJSON(
             'http://mtgbase.herokuapp.com/search',
-            { card_name: $("#card_name").val() }
+            {
+                card_name: $("#card_name").val(),
+                'result_filter[0]': 'card_image_url',
+                'result_filter[1]': 'multiverseid'
+            }
         ).done(function(data) {
             if (data.length === 0) {
                 select_dialog.append("<div>該当カードなし</div>");
