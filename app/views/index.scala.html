@@ -2,24 +2,55 @@
 
 @layout("MTG プロキシ印刷ウェブアプリケーション") {
 <div class="row">
-    <div class="twelve columns">
-        <nav class="top-bar">
-            <ul>
-                <li class="name">
-                    <h1>
-                        <a href="/">MTG プロキシ印刷ウェブアプリケーション</a>
-                    </h1>
-                </li>
+    <nav class="top-bar">
+        <ul>
+            <li class="name">
+                <h1>
+                    <a href="/">MTG プロキシ印刷ウェブアプリケーション</a>
+                </h1>
+            </li>
+        </ul>
+    </nav>
+</div>
+<section class="row">
+    <h3>このサイトは？</h3>
+    Magic:The Gatheringの<a href="http://mtgwiki.com/wiki/%E3%83%97%E3%83%AD%E3%82%AD%E3%82%B7">プロキシ</a>を印刷するためのアプリケーションです。
+    主にMagic Onlineでプレイしてるプレイヤーがリアルでも友人とデッキ調整できるようにするために作っています。
+</section>
+<div class="row">
+    <div class="six columns">
+        <section class="row">
+            <h4>用意するもの</h4>
+            <ul class="circle">
+                <li>使わないカード75枚</li>
+                <li>カードスリーブ75枚</li>
+                <li>PCとプリンタ(PDF化してコンビニで印刷するなどの方法も)</li>
+                <li>作りたいデッキのカード種類と枚数の情報</li>
             </ul>
-        </nav>
+        </section>
+        <section class="row">
+            <h4>使い方</h4>
+            <ol>
+                <li>
+                    使いたいカードの情報を下のフォームですべて入力
+                    <ul>
+                        <li>「カードを検索」ボタンを押してカードを検索</li>
+                        <li>検索結果のカード一覧から使いたいカードを選択</li>
+                        <li>そのカードを使いたい枚数を指定</li>
+                        <li>さらに使いたいカードがあれば「カード入力欄を追加」ボタンからフォームを増やす</li>
+                    </ul>
+                </li>
+                <li>「印刷用ページを表示」ボタンを押す</li>
+                <li>ブラウザの印刷フォームからページを印刷。この際印刷プレビューでページごとに3x3=9枚ずつタイル状に配置されてることを確認する</li>
+                <li>印刷したカード画像を1枚ずつ切る</li>
+                <li>切り離したカード画像と使用しないカードを一緒にスリーブ内へ入れる</li>
+                <li>75枚いれればプロキシデッキのできあがり</li>
+            </ol>
+
+        </section>
     </div>
-    <section class="row">
-        <h3>このサイトは？</h3>
-        Magic:The Gatheringの<a href="http://mtgwiki.com/wiki/%E3%83%97%E3%83%AD%E3%82%AD%E3%82%B7">プロキシ</a>を印刷するためのアプリケーションです。
-        主にMagic Onlineでプレイしてるプレイヤーがリアルでも友人とデッキ調整できるようにするために作っています。
-    </section>
-    <div class="row">
-        <section class="six columns">
+    <div class="six columns">
+        <section class="row">
             <h4>印刷用ページの特徴と注意点</h4>
             印刷用ページとして表示される画面は一見カードの画像が無造作に並んでるように見えますが、
             実際には上手く印刷されるようにいくつかの工夫がされています。
@@ -28,13 +59,11 @@
                 <li>印刷時にA4サイズに合わせて3x3=9枚でカード画像をタイリング</li>
             </ul>
         </section>
-        <section class="six columns">
+        <section class="row">
             <h4>TODO(できたらいいな)リスト</h4>
             <ul class="circle">
                 <li>言語によって印刷するカードを変更できるようにする(スクレイピング処理の修正が必要)</li>
                 <li>MOのデッキリストを読み込んでmultiverseidを自動入力</li>
-                <li><del>MTGカード検索ダイアログを作ってgathererで検索する手間を省く</del></li>
-                <li><del>入力フォームが不必要に多いためJSで数を調整できるようにする</del></li>
                 <li>印刷用ページが非常に見づらくわかりにくいので最低限レイアウトを整える</li>
                 <li>印刷用ページのCSSがイマイチなので修正</li>
                 <li>機能改善・要望・クレーム用のフォームを作る</li>
@@ -80,16 +109,16 @@
         <div class="twelve columns">
             <form>
                 <ul class="block-grid three-up">
-                @for(attr <- List(("カード名(英語のみ)", "card_name"), ("マナコスト（合計）", "converted_mana_cost"), ("特殊タイプ", "type.supertypes"),
-                ("カードタイプ", "type.cardtypes"), ("サブタイプ", "type.subtypes"), ("カードテキスト", "card_text"),
-                ("フレーバーテキスト", "flavor_text"), ("透かし", "watermark"), ("色指標", "color_indicator"),
-                ("パワー", "p_t.power"), ("タフネス", "p_t.toughness"), ("忠誠度", "loyalty"),
-                ("エキスパンション", "expansion"), ("レアリティ", "rarity"),/* ("含まれるカードセット", ""),*/
-                /*("カード番号", ""), */("アーティスト", "artist")/*, ("マルチバースID", "")*/)) {
+                    @for(attr <- List(("カード名(英語のみ)", "card_name"), ("マナコスト（合計）", "converted_mana_cost"), ("特殊タイプ", "type.supertypes"),
+                    ("カードタイプ", "type.cardtypes"), ("サブタイプ", "type.subtypes"), ("カードテキスト", "card_text"),
+                    ("フレーバーテキスト", "flavor_text"), ("透かし", "watermark"), ("色指標", "color_indicator"),
+                    ("パワー", "p_t.power"), ("タフネス", "p_t.toughness"), ("忠誠度", "loyalty"),
+                    ("エキスパンション", "expansion"), ("レアリティ", "rarity"),/* ("含まれるカードセット", ""),*/
+                    /*("カード番号", ""), */("アーティスト", "artist")/*, ("マルチバースID", "")*/)) {
                     <li>
                         <label>@(attr._1):<input type="text" placeholder="@(attr._1)" name="@(attr._2)"/></label>
                     </li>
-                }
+                    }
                 </ul>
                 <div align="center">
                     <input type="submit" class="button" id="card_search_button" value="検索">
