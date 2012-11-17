@@ -1,17 +1,14 @@
 $(document).ready(function(){
-    var select_dialog = $("#select_dialog");
-
     var SelectDialog = Backbone.View.extend({
         el: $("#select_dialog"),
         initialize: function() {
-            searchDialog = this.options.searchDialog;
-            $(".card_image").live("click", function(event) {
-                select_dialog.dialog("close");
-                searchDialog.$el.dialog("close");
-                var input_mid = $("#mid_input_" + String(searchDialog.$el.data('index')));
+            $(".card_image").live("click", $.proxy(function(event) {
+                this.$el.dialog("close");
+                this.options.searchDialog.$el.dialog("close");
+                var input_mid = $("#mid_input_" + String(this.options.searchDialog.$el.data('index')));
                 input_mid.val($(event.target).attr("multiverseid"));
                 input_mid.change();
-            });
+            }, this));
         },
         show: function(searchParameters) {
             this.$el.empty();
@@ -19,17 +16,16 @@ $(document).ready(function(){
 
             $.getJSON(
                 'http://mtgbase.herokuapp.com/search', searchParameters
-            ).done(function(data) {
+            ).done($.proxy(function(data) {
                 if (data.length === 0) {
-                    select_dialog.append("<div>該当カードなし</div>");
+                    this.$el.append("<div>該当カードなし</div>");
                 } else {
                     _.each(data, function(card_property) {
                         var image_tag = "<img class='card_image' src='<%= src %>' multiverseid='<%= multiverseid %>' style='cursor:pointer;'>";
-                        select_dialog.append(_.template(image_tag, {src: card_property.card_image_url, multiverseid: card_property.multiverseid}));
-                    });
+                        this.$el.append(_.template(image_tag, {src: card_property.card_image_url, multiverseid: card_property.multiverseid}));
+                    }, this);
                 }
-            });
-
+            }, this));
         }
     });
 
