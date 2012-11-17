@@ -57,30 +57,30 @@ $(document).ready(function(){
 
     var searchDialog = new SearchDialog();
 
+    var CardPrintForm = Backbone.View.extend({
+    });
+
     var CardsInputForm = Backbone.View.extend({
         el: $("#cards_input_form"),
+        cardPrintForms: new Array(),
         initialize: function() {
-            this.count = 0;
             $.proxy(this.events["click #add_card_input_form_button"], this)();
         },
         events: {
             "click #add_card_input_form_button": function() {
-                this.$el.find("#card_list_for_print").append(_.template($("#card_print_form").html(), { index: this.count }));
-                this.count++;
+                this.$el.find("#card_list_for_print").append(_.template($("#card_print_form").html(), { index: _.size(this.cardPrintForms) }));
+                this.cardPrintForms.push(new CardPrintForm());
             },
             "click #remove_card_input_form_button": function() {
-                if (cardsInputForm.count > 1) {
+                if (_.size(this.cardPrintForms) > 1) {
                     this.$el.find("#card_list_for_print").children().last().remove();
-                    this.count--;
+                    this.cardPrintForms.pop();
                 }
             }
         }
     });
 
     var cardsInputForm = new CardsInputForm();
-
-    var CardPrintForm = Backbone.View.extend({
-    });
 
     $(".input_card_number").live("change", function(event) {
         var input_multiverseid = $(event.target);
