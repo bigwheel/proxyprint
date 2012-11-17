@@ -5,7 +5,7 @@ $(document).ready(function(){
     var SearchDialog = Backbone.View.extend({
         el: $("#search_dialog"),
         events: {
-            "#card_search_button click":
+            "click #card_search_button":
                 function() {
                 select_dialog.empty();
                 select_dialog.dialog({width: 800, height: 800, modal: true});
@@ -28,10 +28,14 @@ $(document).ready(function(){
                     }
                 });
             }
+        },
+        show: function() {
+            search_dialog.dialog({width: 800, height: 550, modal: true});
+            search_dialog.data('index', $(this).attr('index'));
         }
     });
 
-    new SearchDialog();
+    var searchDialog = new SearchDialog();
 
     var card_list_for_print = $("#card_list_for_print");
     card_list_for_print.data("count", 0);
@@ -56,8 +60,7 @@ $(document).ready(function(){
     });
 
     $(".card_search_button").live("click", function(event) {
-        search_dialog.dialog({width: 800, height: 550, modal: true});
-        search_dialog.data('index', $(this).attr('index'));
+        searchDialog.show();
     });
 
     $(".card_image").live("click", function(event) {
