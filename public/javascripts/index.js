@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    var search_dialog = $("#search_dialog");
     var select_dialog = $("#select_dialog");
 
     var SearchDialog = Backbone.View.extend({
@@ -30,8 +29,8 @@ $(document).ready(function(){
             }
         },
         show: function(form_index) {
-            search_dialog.dialog({width: 800, height: 550, modal: true});
-            search_dialog.data('index', form_index);
+            this.$el.dialog({width: 800, height: 550, modal: true});
+            this.$el.data('index', form_index);
         }
     });
 
@@ -65,8 +64,8 @@ $(document).ready(function(){
 
     $(".card_image").live("click", function(event) {
         select_dialog.dialog("close");
-        search_dialog.dialog("close");
-        var input_mid = $("#mid_input_" + String(search_dialog.data('index')));
+        searchDialog.$el.dialog("close");
+        var input_mid = $("#mid_input_" + String(searchDialog.$el.data('index')));
         input_mid.val($(event.target).attr("multiverseid"));
         input_mid.change();
     });
