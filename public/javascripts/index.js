@@ -2,8 +2,9 @@ $(document).ready(function(){
     var select_dialog = $("#select_dialog");
 
     var SelectDialog = Backbone.View.extend({
-        el: $("select_dialog"),
-        initialize: function(searchDialog) {
+        el: $("#select_dialog"),
+        initialize: function() {
+            searchDialog = this.options.searchDialog;
             $(".card_image").live("click", function(event) {
                 select_dialog.dialog("close");
                 searchDialog.$el.dialog("close");
@@ -11,18 +12,21 @@ $(document).ready(function(){
                 input_mid.val($(event.target).attr("multiverseid"));
                 input_mid.change();
             });
+        },
+        show: function() {
+            this.$el.empty();
+            this.$el.dialog({width: 800, height: 800, modal: true});
         }
     });
 
     var SearchDialog = Backbone.View.extend({
         el: $("#search_dialog"),
         initialize: function() {
-            this.selectDialog = new SelectDialog(this);
+            this.selectDialog = new SelectDialog({searchDialog: this});
         },
         events: {
             "click #card_search_button": function() {
-                select_dialog.empty();
-                select_dialog.dialog({width: 800, height: 800, modal: true});
+                this.selectDialog.show();
                 var params = {};
                 _.each($("#search_dialog input[name]"), function(param) {
                     params[$(param).attr("name")] = $(param).val();
