@@ -58,25 +58,35 @@ $(document).ready(function(){
     var searchDialog = new SearchDialog();
 
     var CardPrintForm = Backbone.View.extend({
+        render: function() {
+            this.options.parent.append(_.template($("#card_print_form").html(), { index: this.options.index }));
+        }
     });
 
     var CardsInputForm = Backbone.View.extend({
         el: $("#cards_input_form"),
         cardPrintForms: new Array(),
         initialize: function() {
+            this.card_list = this.$el.find("#card_list_for_print");
             $.proxy(this.events["click #add_card_input_form_button"], this)();
         },
         events: {
             "click #add_card_input_form_button": function() {
-                this.$el.find("#card_list_for_print").append(_.template($("#card_print_form").html(), { index: _.size(this.cardPrintForms) }));
-                this.cardPrintForms.push(new CardPrintForm());
+                this.cardPrintForms.push(new CardPrintForm({parent: this.card_list, index: _.size(this.cardPrintForms)}));
+                this.render();
             },
             "click #remove_card_input_form_button": function() {
                 if (_.size(this.cardPrintForms) > 1) {
-                    this.$el.find("#card_list_for_print").children().last().remove();
                     this.cardPrintForms.pop();
+                    this.render();
                 }
             }
+        },
+        render: function() {
+            this.card_list.empty();
+            _.each(this.cardPrintForms, function(cardPrintForm) {
+                cardPrintForm.render();
+            });
         }
     });
 
