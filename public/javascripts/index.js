@@ -61,30 +61,25 @@ $(document).ready(function(){
         el: $("#cards_input_form"),
         initialize: function() {
             this.count = 0;
+            this.add();
         },
         events: {
-            "click #add_card_input_form_button": function() {
-                console.log("test");
+            "click #add_card_input_form_button": "add",
+            "click #remove_card_input_form_button": function() {
+                if (cardsInputForm.count > 1) {
+                    $("#card_list_for_print").children().last().remove();
+                    this.count--;
+                }
             }
+        },
+        add: function() {
+            $("#card_list_for_print").append(_.template($("#card_print_form").html(), { index: this.count }));
+            this.count++;
         }
     });
 
     var cardsInputForm = new CardsInputForm();
 
-    var card_list_for_print = $("#card_list_for_print");
-    var add_card_input_form_button = $("#add_card_input_form_button");
-    function add_card_input_form() {
-        card_list_for_print.append(_.template($("#card_print_form").html(), { index: cardsInputForm.count }));
-        cardsInputForm.count++;
-    };
-    add_card_input_form_button.click(add_card_input_form);
-    add_card_input_form();
-    $("#remove_card_input_form_button").click(function(){
-        if (cardsInputForm.count > 1) {
-            card_list_for_print.children().last().remove();
-        cardsInputForm.count--;
-        }
-    });
 
     $(".input_card_number").live("change", function(event) {
         var input_multiverseid = $(event.target);
