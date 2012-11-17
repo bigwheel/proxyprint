@@ -1,11 +1,26 @@
 $(document).ready(function(){
     var select_dialog = $("#select_dialog");
 
+    var SelectDialog = Backbone.View.extend({
+        el: $("select_dialog"),
+        initialize: function(searchDialog) {
+            $(".card_image").live("click", function(event) {
+                select_dialog.dialog("close");
+                searchDialog.$el.dialog("close");
+                var input_mid = $("#mid_input_" + String(searchDialog.$el.data('index')));
+                input_mid.val($(event.target).attr("multiverseid"));
+                input_mid.change();
+            });
+        }
+    });
+
     var SearchDialog = Backbone.View.extend({
         el: $("#search_dialog"),
+        initialize: function() {
+            this.selectDialog = new SelectDialog(this);
+        },
         events: {
-            "click #card_search_button":
-                function() {
+            "click #card_search_button": function() {
                 select_dialog.empty();
                 select_dialog.dialog({width: 800, height: 800, modal: true});
                 var params = {};
@@ -34,22 +49,7 @@ $(document).ready(function(){
         }
     });
 
-    var SelectDialog = Backbone.View.extend({
-        el: $("select_dialog"),
-        initialize: function(searchDialog) {
-            $(".card_image").live("click", function(event) {
-                select_dialog.dialog("close");
-                console.log(SearchDialog);
-                searchDialog.$el.dialog("close");
-                var input_mid = $("#mid_input_" + String(searchDialog.$el.data('index')));
-                input_mid.val($(event.target).attr("multiverseid"));
-                input_mid.change();
-            });
-        }
-    });
-
     var searchDialog = new SearchDialog();
-    var selectDialog = new SelectDialog(searchDialog);
 
     var card_list_for_print = $("#card_list_for_print");
     card_list_for_print.data("count", 0);
