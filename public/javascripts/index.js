@@ -13,9 +13,23 @@ $(document).ready(function(){
                 input_mid.change();
             });
         },
-        show: function() {
+        show: function(searchParameters) {
             this.$el.empty();
             this.$el.dialog({width: 800, height: 800, modal: true});
+
+            $.getJSON(
+                'http://mtgbase.herokuapp.com/search', searchParameters
+            ).done(function(data) {
+                if (data.length === 0) {
+                    select_dialog.append("<div>該当カードなし</div>");
+                } else {
+                    _.each(data, function(card_property) {
+                        var image_tag = "<img class='card_image' src='<%= src %>' multiverseid='<%= multiverseid %>' style='cursor:pointer;'>";
+                        select_dialog.append(_.template(image_tag, {src: card_property.card_image_url, multiverseid: card_property.multiverseid}));
+                    });
+                }
+            });
+
         }
     });
 
@@ -26,7 +40,6 @@ $(document).ready(function(){
         },
         events: {
             "click #card_search_button": function() {
-                this.selectDialog.show();
                 var params = function() {
                     var params = {};
                     _.each($("#search_dialog input[name]"), function(param) {
@@ -36,18 +49,7 @@ $(document).ready(function(){
                     params['result_filter[1]'] = 'multiverseid';
                     return params;
                 }();
-                $.getJSON(
-                    'http://mtgbase.herokuapp.com/search', params
-                ).done(function(data) {
-                    if (data.length === 0) {
-                        select_dialog.append("<div>該当カードなし</div>");
-                    } else {
-                        _.each(data, function(card_property) {
-                            var image_tag = "<img class='card_image' src='<%= src %>' multiverseid='<%= multiverseid %>' style='cursor:pointer;'>";
-                            select_dialog.append(_.template(image_tag, {src: card_property.card_image_url, multiverseid: card_property.multiverseid}));
-                        });
-                    }
-                });
+                this.selectDialog.show(params);
             }
         },
         show: function(form_index) {
