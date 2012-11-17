@@ -1,16 +1,17 @@
 $(document).ready(function(){
     var SelectDialog = Backbone.View.extend({
         el: $("#select_dialog"),
-        initialize: function() {
-            $(".card_image").live("click", $.proxy(function(event) {
+        events: {
+            "click .card_image": function(event) {
                 this.$el.dialog("close");
                 this.options.searchDialog.$el.dialog("close");
-                var input_mid = $("#mid_input_" + String(this.options.searchDialog.$el.data('index')));
+                var input_mid = $("#mid_input_" + this.form_index);
                 input_mid.val($(event.target).attr("multiverseid"));
                 input_mid.change();
-            }, this));
+            }
         },
-        show: function(searchParameters) {
+        show: function(searchParameters, form_index) {
+            this.form_index = form_index;
             this.$el.empty();
             this.$el.dialog({width: 800, height: 800, modal: true});
 
@@ -45,12 +46,12 @@ $(document).ready(function(){
                     params['result_filter[1]'] = 'multiverseid';
                     return params;
                 }();
-                this.selectDialog.show(params);
+                this.selectDialog.show(params, this.form_index);
             }
         },
         show: function(form_index) {
+            this.form_index = form_index;
             this.$el.dialog({width: 800, height: 550, modal: true});
-            this.$el.data('index', form_index);
         }
     });
 
