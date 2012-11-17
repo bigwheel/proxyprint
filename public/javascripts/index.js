@@ -29,9 +29,9 @@ $(document).ready(function(){
                 });
             }
         },
-        show: function(index) {
+        show: function(form_index) {
             search_dialog.dialog({width: 800, height: 550, modal: true});
-            search_dialog.data('index', index);
+            search_dialog.data('index', form_index);
         }
     });
 
