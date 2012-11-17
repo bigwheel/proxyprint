@@ -27,12 +27,15 @@ $(document).ready(function(){
         events: {
             "click #card_search_button": function() {
                 this.selectDialog.show();
-                var params = {};
-                _.each($("#search_dialog input[name]"), function(param) {
-                    params[$(param).attr("name")] = $(param).val();
-                });
-                params['result_filter[0]'] = 'card_image_url';
-                params['result_filter[1]'] = 'multiverseid';
+                var params = function() {
+                    var params = {};
+                    _.each($("#search_dialog input[name]"), function(param) {
+                        params[$(param).attr("name")] = $(param).val();
+                    });
+                    params['result_filter[0]'] = 'card_image_url';
+                    params['result_filter[1]'] = 'multiverseid';
+                    return params;
+                }();
                 $.getJSON(
                     'http://mtgbase.herokuapp.com/search', params
                 ).done(function(data) {
