@@ -2,28 +2,36 @@ $(document).ready(function(){
     var search_dialog = $("#search_dialog");
     var select_dialog = $("#select_dialog");
 
-    $("#card_search_button").click(function() {
-        select_dialog.dialog({width: 800, height: 800, modal: true});
-        select_dialog.empty();
-        var params = {};
-        _.each($("#search_dialog input[name]"), function(param) {
-            params[$(param).attr("name")] = $(param).val();
-        });
-        params['result_filter[0]'] = 'card_image_url';
-        params['result_filter[1]'] = 'multiverseid';
-        $.getJSON(
-            'http://mtgbase.herokuapp.com/search', params
-        ).done(function(data) {
-            if (data.length === 0) {
-                select_dialog.append("<div>該当カードなし</div>");
-            } else {
-                _.each(data, function(card_property) {
-                    var image_tag = "<img class='card_image' src='<%= src %>' multiverseid='<%= multiverseid %>' style='cursor:pointer;'>";
-                    select_dialog.append(_.template(image_tag, {src: card_property.card_image_url, multiverseid: card_property.multiverseid}));
+    var SearchDialog = Backbone.View.extend({
+        el: $("#search_dialog"),
+        events: {
+            "#card_search_button click":
+                function() {
+                select_dialog.empty();
+                select_dialog.dialog({width: 800, height: 800, modal: true});
+                var params = {};
+                _.each($("#search_dialog input[name]"), function(param) {
+                    params[$(param).attr("name")] = $(param).val();
+                });
+                params['result_filter[0]'] = 'card_image_url';
+                params['result_filter[1]'] = 'multiverseid';
+                $.getJSON(
+                    'http://mtgbase.herokuapp.com/search', params
+                ).done(function(data) {
+                    if (data.length === 0) {
+                        select_dialog.append("<div>該当カードなし</div>");
+                    } else {
+                        _.each(data, function(card_property) {
+                            var image_tag = "<img class='card_image' src='<%= src %>' multiverseid='<%= multiverseid %>' style='cursor:pointer;'>";
+                            select_dialog.append(_.template(image_tag, {src: card_property.card_image_url, multiverseid: card_property.multiverseid}));
+                        });
+                    }
                 });
             }
-        });
+        }
     });
+
+    new SearchDialog();
 
     var card_list_for_print = $("#card_list_for_print");
     card_list_for_print.data("count", 0);
