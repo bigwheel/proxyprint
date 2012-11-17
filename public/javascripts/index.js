@@ -61,25 +61,23 @@ $(document).ready(function(){
         el: $("#cards_input_form"),
         initialize: function() {
             this.count = 0;
-            this.add();
+            $.proxy(this.events["click #add_card_input_form_button"], this)();
         },
         events: {
-            "click #add_card_input_form_button": "add",
+            "click #add_card_input_form_button": function() {
+                $("#card_list_for_print").append(_.template($("#card_print_form").html(), { index: this.count }));
+                this.count++;
+            },
             "click #remove_card_input_form_button": function() {
                 if (cardsInputForm.count > 1) {
                     $("#card_list_for_print").children().last().remove();
                     this.count--;
                 }
             }
-        },
-        add: function() {
-            $("#card_list_for_print").append(_.template($("#card_print_form").html(), { index: this.count }));
-            this.count++;
         }
     });
 
     var cardsInputForm = new CardsInputForm();
-
 
     $(".input_card_number").live("change", function(event) {
         var input_multiverseid = $(event.target);
