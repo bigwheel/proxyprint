@@ -34,7 +34,22 @@ $(document).ready(function(){
         }
     });
 
+    var SelectDialog = Backbone.View.extend({
+        el: $("select_dialog"),
+        initialize: function(searchDialog) {
+            $(".card_image").live("click", function(event) {
+                select_dialog.dialog("close");
+                console.log(SearchDialog);
+                searchDialog.$el.dialog("close");
+                var input_mid = $("#mid_input_" + String(searchDialog.$el.data('index')));
+                input_mid.val($(event.target).attr("multiverseid"));
+                input_mid.change();
+            });
+        }
+    });
+
     var searchDialog = new SearchDialog();
+    var selectDialog = new SelectDialog(searchDialog);
 
     var card_list_for_print = $("#card_list_for_print");
     card_list_for_print.data("count", 0);
@@ -60,13 +75,5 @@ $(document).ready(function(){
 
     $(".card_search_button").live("click", function(event) {
         searchDialog.show($(this).attr('index'));
-    });
-
-    $(".card_image").live("click", function(event) {
-        select_dialog.dialog("close");
-        searchDialog.$el.dialog("close");
-        var input_mid = $("#mid_input_" + String(searchDialog.$el.data('index')));
-        input_mid.val($(event.target).attr("multiverseid"));
-        input_mid.change();
     });
 });
