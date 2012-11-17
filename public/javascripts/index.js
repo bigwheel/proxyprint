@@ -29,9 +29,9 @@ $(document).ready(function(){
                 });
             }
         },
-        show: function() {
+        show: function(index) {
             search_dialog.dialog({width: 800, height: 550, modal: true});
-            search_dialog.data('index', $(this).attr('index'));
+            search_dialog.data('index', index);
         }
     });
 
@@ -60,7 +60,7 @@ $(document).ready(function(){
     });
 
     $(".card_search_button").live("click", function(event) {
-        searchDialog.show();
+        searchDialog.show($(this).attr('index'));
     });
 
     $(".card_image").live("click", function(event) {
