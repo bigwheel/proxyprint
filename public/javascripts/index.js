@@ -58,8 +58,20 @@ $(document).ready(function(){
     var searchDialog = new SearchDialog();
 
     var CardPrintForm = Backbone.View.extend({
-        render: function() {
-            this.options.parent.append(_.template($("#card_print_form").html(), { index: this.options.index }));
+        events: {
+            "change .input_card_number": function(event) {
+                var input_multiverseid = $(event.target);
+                input_multiverseid.closest("fieldset").find("div.div_card_image img").
+                    attr("src", "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + String(input_multiverseid.val()) + "&type=card");
+            },
+            "click .card_search_button": function(event) {
+                searchDialog.show(this.options.index);
+            }
+        },
+        make: function(parent, index) {
+            var form =  $(_.template($("#card_print_form").html(), { index: index }));
+            parent.append(form);
+            return new CardPrintForm({el: form, index: index});
         }
     });
 
@@ -67,38 +79,20 @@ $(document).ready(function(){
         el: $("#cards_input_form"),
         cardPrintForms: new Array(),
         initialize: function() {
-            this.card_list = this.$el.find("#card_list_for_print");
+            this.card_list = this.$("#card_list_for_print");
             $.proxy(this.events["click #add_card_input_form_button"], this)();
         },
         events: {
             "click #add_card_input_form_button": function() {
-                this.cardPrintForms.push(new CardPrintForm({parent: this.card_list, index: _.size(this.cardPrintForms)}));
-                this.render();
+                this.cardPrintForms.push(CardPrintForm.prototype.make(this.card_list, _.size(this.cardPrintForms)));
             },
             "click #remove_card_input_form_button": function() {
                 if (_.size(this.cardPrintForms) > 1) {
-                    this.cardPrintForms.pop();
-                    this.render();
+                    this.cardPrintForms.pop().remove();
                 }
             }
-        },
-        render: function() {
-            this.card_list.empty();
-            _.each(this.cardPrintForms, function(cardPrintForm) {
-                cardPrintForm.render();
-            });
         }
     });
 
     var cardsInputForm = new CardsInputForm();
-
-    $(".input_card_number").live("change", function(event) {
-        var input_multiverseid = $(event.target);
-        input_multiverseid.closest("fieldset").find("div.div_card_image img").
-            attr("src", "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=" + String(input_multiverseid.val()) + "&type=card");
-    });
-
-    $(".card_search_button").live("click", function(event) {
-        searchDialog.show($(this).attr('index'));
-    });
 });
