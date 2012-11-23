@@ -9,12 +9,13 @@ define(function() {
             "click .card_search_button": function(event) {
                 this.options.searchDialog.show(this.options.index);
             }
-        },
-        make: function(parent, index, searchDialog) {
-            var form =  $(_.template($("#card_print_form").html(), { index: index }));
-            parent.append(form);
-            return new CardPrintForm({el: form, index: index, searchDialog: searchDialog});
         }
     });
+    CardPrintForm.make = function(parent, index, searchDialog) {
+        var form =  $(_.template($("#card_print_form").html(), { index: index }));
+        parent.append(form);
+        return new CardPrintForm({el: form, index: index, searchDialog: searchDialog});
+    };
+
     return CardPrintForm;
 });
