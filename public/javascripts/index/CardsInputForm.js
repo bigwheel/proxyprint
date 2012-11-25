@@ -8,7 +8,8 @@ define(["./CardPrintForm"], function(CardPrintForm) {
         },
         events: {
             "click #add_card_input_form_button": function() {
-                this.cardPrintForms.push(CardPrintForm.make(this.card_list, _.size(this.cardPrintForms), this.options.searchDialog));
+                var cpf = CardPrintForm.make(this.card_list, _.size(this.cardPrintForms), this.options.searchDialog);
+                this.cardPrintForms.push(cpf);
             },
             "click #remove_card_input_form_button": function() {
                 if (_.size(this.cardPrintForms) > 1) {
