@@ -28,12 +28,30 @@ define(["./CardPrintForm"], function(CardPrintForm) {
         addCardsFromDeckList: function(file) {
             var fr = new FileReader();
             fr.onload = $.proxy(function(event) {
-                $.post('http://mtgbase.herokuapp.com/jsonize',
-                       { cards_of_deck: event.target.result },
+                var lines = event.target.result.split(/\r\n/)
+                var card_list = _.compact(_.map(lines, function(line) {
+                    if (line.match(/^(\d+) (.+)$/)) {
+                        return { number_of_cards: RegExp.$1,
+                            card_name: RegExp.$2 };
+                    } else {
+                        return null;
+                    }
+                }));
+                var params_of_cardlist = _.map(card_list, function(card) {
+                    return { card_name: card.card_name }
+                });
+                $.post('http://mtgbase.herokuapp.com/get_card_details',
+                       { card_list: params_of_cardlist },
                        null,
                        "json"
                       ).done($.proxy(function(cards) {
-                          _.each(cards, function(card) {
+                          var i;
+                          var card_detail_and_nums = new Array();
+                          for (i = 0; i < _.size(card_list); i++) {
+                              card_detail_and_nums.push({ number_of_cards: card_list[i].number_of_cards,
+                                                        card_property: cards[i] });
+                          }
+                          _.each(card_detail_and_nums, function(card) {
                               var cpf = CardPrintForm.make(this.card_list, _.size(this.cardPrintForms), this.options.searchDialog);
                               cpf.$(".input_card_number").val(card.card_property.multiverseid).change();
                               cpf.$("input[name='num[" + _.size(this.cardPrintForms) + "]']").val(card.number_of_cards).change();
